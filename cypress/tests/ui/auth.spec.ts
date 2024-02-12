@@ -127,7 +127,7 @@ describe("User Sign-up and Login", function () {
 
     // Navigate to sign up page and check if user has been directed to the correct page.
     cy.visit("/signup");
-    cy.location("pathname").should("eq", "/signup");
+    cy.location("pathname").should("eq", "/signup"); // check to see if user has been redirected to signup page.
 
     // Fill in all fields, and click sign up.
     cy.getBySel("signup-first-name").type(info.firstName);
@@ -136,21 +136,17 @@ describe("User Sign-up and Login", function () {
     cy.getBySel("signup-password").type(info.password);
     cy.getBySel("signup-confirmPassword").type(info.password);
     cy.getBySel("signup-submit").click();
-
-    // Check to see if we have been redirected back to the login page
-    cy.location("pathname").should("eq", "/signin")
+    cy.location("pathname").should("eq", "/signin") // Check to see if we have been redirected back to the login page
 
     // Fill in login information entered previously.
     cy.getBySel("signin-username").type(info.username);
     cy.getBySel("signin-password").type(info.password);
     cy.getBySel("signin-submit").click();
+    cy.location("pathname").should("eq", "/") // Check to see if we have been redirected to the home page.
 
-    // Check to see if we have been redirected to the home page.
-    cy.location("pathname").should("eq", "/")
-
-    // Logout user.
+    // Logout user using refactored function.
     logout();
-    cy.location("pathname").should("eq", "/signin");
+    cy.location("pathname").should("eq", "/signin"); // Check to see if user has been redirected to login page
     cy.visualSnapshot("Redirect to SignIn");
   });
 });

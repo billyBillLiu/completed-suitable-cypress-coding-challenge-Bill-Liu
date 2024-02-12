@@ -12,7 +12,7 @@ describe("New Transaction", function () {
   const ctx: NewTransactionTestCtx = {};
 
   // New function to refactor reused code from first test case
-  // Performs and tests transactions
+  // Takes payload and submission type to perform and test transactions
   const testTransaction = (transaction: {amount: string, description: string}, submitType: string) => {
     cy.getBySelLike("new-transaction").click();
     cy.wait("@allUsers");
